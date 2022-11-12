@@ -1,9 +1,4 @@
 import mongoose from "mongoose";
-import serviceAccount from "./key.json" assert { type: "json"};
-// para dejar mas separado el warnign de node en la consola:
-console.log("")
-console.log("")
-import admin from "firebase-admin"
 
 export async function dbMN() {
     try {
@@ -17,15 +12,4 @@ export async function dbMN() {
         console.log(e)
     }
 
-}
-
-
-export async function dbFB() {
-    try {
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount)
-        });
-    } catch (e) {
-        console.log(e)
-    }
 }

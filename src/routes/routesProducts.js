@@ -6,7 +6,7 @@ const router = Router();
 const ProductsMongo = new ProductsMongoDAO();
 
 router.get(`/`, async (req, res) => {
-    const products = await ProductsMongo.getAll()
+    const products = await ProductsMongo.get()
     if ( products.length !== 0) {
         res.json(products)
     } else {
@@ -16,7 +16,7 @@ router.get(`/`, async (req, res) => {
 
 router.get(`/:id`, async (req, res) => {
     const id = req.params.id;
-    const products = await ProductsMongo.getById(id)
+    const products = await ProductsMongo.get(id)
     if ( products == null) {
         res.json({mensaje: "Este producto no existe", result: "NO"})
     } else {

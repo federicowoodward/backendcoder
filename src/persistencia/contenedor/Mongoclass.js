@@ -5,11 +5,12 @@ export class MongoClass {
         this.collection = collection;
     }
     
-    async getAll() {
-        return await this.collection.find({});
-    }
-    async getById(id) {
-        return await this.collection.findById(id);
+    async get(id) {
+        if (id === undefined) {
+            return await this.collection.find({});
+        } else {
+            return await this.collection.findById(id);
+        }
     }
     async create(data) {
         return await new this.collection(data).save()
