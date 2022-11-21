@@ -6,7 +6,7 @@ const UsersMongo = new UsersMongoDAO();
 
 router.post(`/register`, async (req, res) => {
    const user = req.body
-   const userCreated = await UsersMongo.create(user)
+   const userCreated = await UsersMongo.createPassword(user)
    res.send({ "status": "created", "extra": { userCreated}})
 })
 
@@ -16,9 +16,10 @@ router.post(`/login`, async (req, res) => {
     if (loginUser.length === 0)  {
         res.send({ "status": "error", "error": "user"})
     } else {
-        if (loginUser[0].password === user.password) {
+        let compare = UsersMongo.comparePassword(user.password, loginUser[0].password)
+        if (compare) {
             res.send({ "status": "correct" })
-        } else {
+        } else if (!compare) {
             res.send({ "status": "error", "error": "password"})
         }
     }
