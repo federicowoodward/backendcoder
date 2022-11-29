@@ -3,11 +3,14 @@ import cors from 'cors';
 import routesProducts from './src/routes/routesProducts.js';
 import routesCarts from './src/routes/routesCarts.js';
 import routesUser from './src/routes/routesUser.js';
+import routeInfo from './src/routes/routeInfo.js';
+import routerRandoms from './src/routes/routerRandoms.js';
 import { dbMN } from "./src/persistencia/dbConnect.js";
 import headersConfiguration from './src/persistencia/headers/header.js';
 headersConfiguration()
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import config from './src/config/config.js';
 const app = express()
 
 // config basica:
@@ -67,16 +70,17 @@ app.delete("/deletecookies", async (req, res) => {
 
 // app.use("/", routesProducts)
 app.use("/users", routesUser)
+app.use("/info", routeInfo)
+app.use("/api", routerRandoms)
 // app.use("/cart", routesCarts)
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = config.PORT || 8080;
 
 app.listen(PORT, async () => {
     await dbMN()
-    console.log("--------------------------------------------")
+    console.log("")
     console.log(`Escuchando en ${PORT}`);
-    console.log("--------------------------------------------")
 });
 
 
