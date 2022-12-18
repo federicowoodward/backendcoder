@@ -5,7 +5,7 @@ import { mockProducts } from '../persistencia/utils/mocks.js';
 const router = Router();
 const ProductsMongo = new ProductsMongoDAO();
 
-router.get(`/get`, async (req, res) => {
+router.get(`/`, async (req, res) => {
     const products = await ProductsMongo.get()
     if ( products.length !== 0) {
         res.json(products)

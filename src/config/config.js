@@ -10,8 +10,8 @@ const options = {
         PORT: "p"
     }
 }
-
 const config = {
+    
     PORT: minimist(process.argv, options).PORT,
     MODO: process.env.MODO || "prod",
     DB: process.env.DB,

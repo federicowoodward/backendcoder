@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(compression())
 
-// app.use("/", routesProducts)
+app.use("/", routesProducts)
 app.use("/users", routesUser)
 app.use("/info", routeInfo)
 app.use("/api", routerRandoms)
@@ -33,6 +33,4 @@ const PORT = config.PORT || 8080;
 app.listen(PORT, async () => {
     await dbMN()
     logger.info(`Escuchando en ${PORT}`)
-    logger.error(`aaa`)
-    logger.warn("hola");
 });
