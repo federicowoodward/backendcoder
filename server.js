@@ -17,7 +17,7 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
 }));
-app.set("trust proxy", 1);
+app.set("trust proxy", 1)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(compression())
