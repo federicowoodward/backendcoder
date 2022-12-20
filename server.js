@@ -28,7 +28,12 @@ app.use("/info", routeInfo)
 app.use("/api", routerRandoms)
 // app.use("/cart", routesCarts)
 
-const PORT = process.env.PORT || 8080;
+let PORT;
+if (config.MODO === "DEV") {
+    PORT = 8080
+} else if (config.MODO === "PROD") {
+    PORT = process.env.PORT
+}
 
 app.listen(PORT, async () => {
     await dbMN()
