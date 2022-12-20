@@ -10,6 +10,7 @@ router.get(`/`, async (req, res) => {
     if ( products.length !== 0) {
         res.json(products)
     } else {
+        console.log(products)
         res.json({mensaje: "no hay productos actualmente", result: "NO"})
     }
 })
@@ -26,7 +27,6 @@ router.get(`/:id`, async (req, res) => {
 
 router.post(`/faker`, async (req, res) => {
     const mockProducto = mockProducts()
-    console.log(mockProducto)
     const createdProduct = await ProductsMongo.create(mockProducto)
     res.json({ mensaje: "Producto creado con exito", result: createdProduct })
 })

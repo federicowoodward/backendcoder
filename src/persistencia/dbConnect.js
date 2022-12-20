@@ -6,6 +6,7 @@ export async function dbMN() {
         const URL = config.DB
         
         mongoose.connect(URL)
+        mongoose.connection.on('connection', () => console.log("Connection established") )
 
         mongoose.connection.on(`error`, (err) => {
             console.log("Error en la conexion: " + err)
@@ -15,3 +16,4 @@ export async function dbMN() {
     }
 
 }
+dbMN()

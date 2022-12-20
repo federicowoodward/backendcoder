@@ -22,11 +22,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(compression())
 
-app.use("/", routesProducts)
+
+app.use("/products", routesProducts)
 app.use("/users", routesUser)
 app.use("/info", routeInfo)
 app.use("/api", routerRandoms)
-// app.use("/cart", routesCarts)
+app.use("/cart", routesCarts)
 
 let PORT;
 if (config.MODO === "DEV") {
@@ -36,6 +37,5 @@ if (config.MODO === "DEV") {
 }
 
 app.listen(PORT, async () => {
-    await dbMN()
     logger.info(`Escuchando en ${PORT}`)
 });
