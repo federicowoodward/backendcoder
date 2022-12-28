@@ -4,7 +4,6 @@ import routesProducts from './src/routes/routesProducts.js';
 import routesCarts from './src/routes/routesCarts.js';
 import routesUser from './src/routes/routesUser.js';
 import routeInfo from './src/routes/routeInfo.js';
-import routerRandoms from './src/routes/routerRandoms.js';
 import { dbMN } from "./src/persistencia/dbConnect.js";
 import './src/persistencia/headers/header.js';
 import config from './src/config/config.js'; 
@@ -26,7 +25,6 @@ app.use(compression())
 app.use("/products", routesProducts)
 app.use("/users", routesUser)
 app.use("/info", routeInfo)
-app.use("/api", routerRandoms)
 app.use("/cart", routesCarts)
 
 let PORT;

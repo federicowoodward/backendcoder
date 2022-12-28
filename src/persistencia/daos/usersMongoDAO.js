@@ -14,7 +14,16 @@ class UsersMongoDAO extends MongoClass {
             name: data.name,
             password: passwordHash
         }
-        return await new this.collection(dataHash).save()
+        try {
+            const userCreated = await new this.collection(dataHash).save()
+            return userCreated
+        } catch (err) {
+            if (err.code === 11000) {
+                return "usuario repetido"
+            } else {
+                console.error(err)
+            }
+        }
     }
 
     comparePassword(password, hash) {
