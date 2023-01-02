@@ -20,7 +20,8 @@
     "express-session": "^1.17.3",
     "firebase-admin": "^11.2.0",
     "log4js": "^6.7.1",
-    "minimist": "^1.2.7"
+    "minimist": "^1.2.7",
+    "twilio": "^2.5.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",

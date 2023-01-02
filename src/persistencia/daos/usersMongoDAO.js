@@ -1,7 +1,8 @@
 import { MongoClass } from "../contenedor/Mongoclass.js";
 import { usersModel } from "../models/modelUser.js"
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import logger from '../utils/logger.js';
+
 
 class UsersMongoDAO extends MongoClass {
     constructor() {
@@ -21,7 +22,8 @@ class UsersMongoDAO extends MongoClass {
             if (err.code === 11000) {
                 return "usuario repetido"
             } else {
-                console.error(err)
+                logger.error(err)
+                return err
             }
         }
     }

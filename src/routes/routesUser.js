@@ -25,7 +25,6 @@ router.post(`/login`, async (req, res) => {
             res.send({ "status": "error", "error": "password"})
         }
     }
-        
 })
 
 router.use(cookieParser("secretKey"))
@@ -35,11 +34,12 @@ router.use(
         saveUninitialized: false,
         secret: "session",
         cookie: {
-            maxAge: 600000,
+            maxAge: 10000,
             // para deployment dejar sameSite : none, secure: true
             sameSite: "lax",
             secure: false,
-            signed: false
+            signed: false,
+            name : "fede"
         },
     })
 )
@@ -57,6 +57,7 @@ router.post("/cookies", (req, res) => {
 
 router.get("/getcookies", async (req, res) => {
     try {
+        console.log(req.session)
         res.send({ data: req.session });
     } catch (error) {
         console.log(error);

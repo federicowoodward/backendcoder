@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ProductsMongoDAO from "../persistencia/daos/productsMongoDAO.js";
 import { mockProducts } from '../persistencia/utils/mocks.js';
+import { client } from "../persistencia/utils/twilio.js";
 
 const router = Router();
 const ProductsMongo = new ProductsMongoDAO();
@@ -53,4 +54,22 @@ router.delete(`/:id`, async (req, res) => {
     }
 })
 
+router.post("/twilio", async (req, res) => {
+    const  {num } = req.body;
+    try {
+        await client.messages.create({
+                body: "prueba twilio wsp",
+                from:   "whatsapp:+14155238886",
+                to: `whatsapp:+${num}`
+            })
+        res.send("mensaje enviado")
+    } catch (err) {
+        if (err.code = "21211") {
+            res.send("este numero no es valido, revisa las reglas para escribir tu numero.")
+        }
+        console.log(err)
+        
+    }
+  
+})
 export default router;
