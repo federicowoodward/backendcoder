@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import UsersMongoDAO from "../persistencia/daos/usersMongoDAO.js";
+import UsersMongoDAO from "../controllers/daos/usersMongoDAO.js";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
@@ -57,7 +57,6 @@ router.post("/cookies", (req, res) => {
 
 router.get("/getcookies", async (req, res) => {
     try {
-        console.log(req.session)
         res.send({ data: req.session });
     } catch (error) {
         console.log(error);

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import CartsMongoDAO from '../persistencia/daos/cartsMongoDAO.js';
+import CartsMongoDAO from '../controllers/daos/cartsMongoDAO.js';
 
 const router = Router();
 const cartsMongo = new CartsMongoDAO();

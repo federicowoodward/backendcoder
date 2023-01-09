@@ -1,4 +1,4 @@
-import config from "./../config/config.js";
+import config from "./../persistencia/config/config.js";
 import { Router } from 'express';
 
 const router = Router();

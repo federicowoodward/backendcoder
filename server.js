@@ -5,9 +5,8 @@ import routesCarts from './src/routes/routesCarts.js';
 import routesUser from './src/routes/routesUser.js';
 import routeInfo from './src/routes/routeInfo.js';
 import { dbMN } from "./src/persistencia/dbConnect.js";
-import './src/persistencia/headers/header.js';
-import config from './src/config/config.js'; 
-import logger from './src/persistencia/utils/logger.js';
+import config from './src/persistencia/config/config.js'; 
+import logger from './src/utils/logger.js';
 import compression from 'compression';
 
 const app = express()

@@ -1,7 +1,7 @@
 import { MongoClass } from "../contenedor/Mongoclass.js";
-import { usersModel } from "../models/modelUser.js"
+import { usersModel } from "../../persistencia/models/modelUser.js"
 import bcrypt from "bcrypt";
-import logger from '../utils/logger.js';
+import logger from '../../utils/logger.js';
 
 
 class UsersMongoDAO extends MongoClass {
