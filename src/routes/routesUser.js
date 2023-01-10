@@ -32,32 +32,37 @@ router.use(
     session({
         resave: false,
         saveUninitialized: false,
-        secret: "session",
+        secret: "clave",
         cookie: {
             maxAge: 10000,
             // para deployment dejar sameSite : none, secure: true
             sameSite: "lax",
             secure: false,
             signed: false,
-            name : "fede"
         },
     })
 )
 
 router.post("/cookies", (req, res) => {
-    const { name } = req.body
+    const name = req.body.name
+    console.log(name)
     try {
-        req.session.user = name;
-        res.send({ message: "saves" }).status(201)
+        req.session.name = name;
+        req.session.rol = "admin";
+        res.send({ message: "saves", rol: req.session.name }).status(201)
     } catch (err) {
         console.log(err)
     }
 })
 
 
-router.get("/getcookies", async (req, res) => {
+router.get("/cookies", async (req, res) => {
     try {
-        res.send({ data: req.session });
+        if (req.session.name !== undefined && req.session.rol !== undefined) {
+            res.send({ user: req.session.name , rol: req.session.rol });
+        } else {
+            res.send("empty")
+        }
     } catch (error) {
         console.log(error);
         res.send(error);
@@ -65,7 +70,7 @@ router.get("/getcookies", async (req, res) => {
 });
 
 
-router.delete("/deletecookies", async (req, res) => {
+router.delete("/cookies", async (req, res) => {
     try {
         req.session.destroy(function (){
         })
