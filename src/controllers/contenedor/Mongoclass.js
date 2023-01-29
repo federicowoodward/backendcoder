@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 export class MongoClass {
     constructor(collection) {
         this.collection = collection;

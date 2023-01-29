@@ -3,8 +3,7 @@ import cors from 'cors';
 import routesProducts from './src/routes/routesProducts.js';
 import routesCarts from './src/routes/routesCarts.js';
 import routesUser from './src/routes/routesUser.js';
-import routeInfo from './src/routes/routeInfo.js';
-import { dbMN } from "./src/persistencia/dbConnect.js";
+import "./src/persistencia/dbConnect.js";
 import config from './src/persistencia/config/config.js'; 
 import logger from './src/utils/logger.js';
 import compression from 'compression';
@@ -23,7 +22,6 @@ app.use(compression())
 
 app.use("/products", routesProducts)
 app.use("/users", routesUser)
-app.use("/info", routeInfo)
 app.use("/cart", routesCarts)
 
 let PORT;

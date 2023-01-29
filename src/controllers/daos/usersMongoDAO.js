@@ -3,7 +3,6 @@ import { usersModel } from "../../persistencia/models/modelUser.js"
 import bcrypt from "bcrypt";
 import logger from '../../utils/logger.js';
 
-
 class UsersMongoDAO extends MongoClass {
     constructor() {
         super(usersModel);
