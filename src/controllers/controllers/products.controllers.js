@@ -21,7 +21,9 @@ const getProductById = async (req, res) => {
 }
 
 const createProduct = async (req, res) => {
-    const createdProduct = await ProductsMongo.create(req.body);
+    const product = req.body.product
+    const productToCreate = {"nombre": product.nombre, "descripcion": product.descripcion, "precio": Number(product.precio), "stock": Number(product.stock)}
+    const createdProduct = await ProductsMongo.create(productToCreate);
     res.json({ mensaje: "Producto creado con exito!", id: createdProduct._id })
 }
 
