@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "chai": "^4.3.7",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "mocha": "^10.2.0",
     "mongoose": "^6.7.0",
     "nodemon": "^2.0.20"
   }
