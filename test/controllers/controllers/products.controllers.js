@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
     const id = req.params.id
-    const products = await productsDtos.getProduct(id)
+    const products = await ProductsMongo.get(id)
     res.json(products)
 }
 
