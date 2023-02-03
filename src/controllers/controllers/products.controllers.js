@@ -20,7 +20,7 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
     let product = createHelper(req.body)
     const createdProduct = await productsDtos.createProduct(product)
-    res.json({ mensaje: 'Producto creado con exito!', id: createdProduct._id })
+    res.json({ message: 'created', id: createdProduct._id })
 }
 
 const udapteProduct = async (req, res) => {
@@ -38,7 +38,7 @@ const deleteProduct = async (req, res) => {
     const deleteProduct = await productsDtos.deleteProduct(id)
     try {
         res.json({
-            mensaje: 'Producto eliminado con exito!',
+            message: 'deleted',
             deleteProduct: deleteProduct,
         })
     } catch (err) {

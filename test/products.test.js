@@ -101,12 +101,13 @@ describe(`Rutas Productos`, () => {
     // create product
     const product_test_create = () => {
         return {
-            nombre: 'product test',
+            nombre: 'product test' + Date.now(),
             descripcion: 'test timestamp: ' + Date.now(),
             precio: 21,
             stock: 122,
         }
     }
+    let id_create
     describe('CREATE', () => {
         const data = async () => {
             return await axios.post(
@@ -114,7 +115,61 @@ describe(`Rutas Productos`, () => {
                 product_test_create()
             )
         }
+
+        it('Mensaje correcto', (done) => {
+            data()
+                .then((res) => {
+                    expect(res.data.message).to.equal(`created`)
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
         it(`Status correcto`, (done) => {
+            data()
+                .then((res) => {
+                    expect(res.status).to.equal(200)
+                    id_create = res.data.id
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
+        it('Creado correctamente', (done) => {
+            const data = async () => {
+                return await axios.get(
+                    `http://localhost:8080/products/${id_create}`
+                )
+            }
+            data()
+                .then((res) => {
+                    expect(res.data).to.be.a(`object`)
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
+    })
+    describe('DELETE', () => {
+        const data = async () => {
+            return await axios.delete(
+                `http://localhost:8080/products/${id_create}`
+            )
+        }
+        it('Mensaje correcto', (done) => {
+            data()
+                .then((res) => {
+                    expect(res.data.message).to.equal(`deleted`)
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
+        it('Status correcto', (done) => {
             data()
                 .then((res) => {
                     expect(res.status).to.equal(200)
