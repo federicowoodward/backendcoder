@@ -17,17 +17,18 @@ export class ProductsDtos {
 
     async getProduct(id) {
         let product = await this.productsMongo.get(id)
-        if (product.length !== 0) {
-            return product
-        } else {
-            return 'no hay producto'
+        return product
             // return errorFactory.getError("no hay productos actualmente");
-        }
     }
 
     async createProduct(product) {
         let productCreated = await this.productsMongo.create(product)
-        return productCreated;
+        return productCreated
+    }
+
+    async udapteProduct(id, product) {
+        let updatedProduct = await this.productsMongo.update(id, product)
+        return updatedProduct
     }
 
     async deleteProduct(id) {

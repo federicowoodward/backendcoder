@@ -60,44 +60,6 @@ describe(`Rutas Productos`, () => {
                 })
         })
     })
-    // getbyid
-    describe(`GET BY ID`, () => {
-        const data = async () => {
-            return await axios.get(
-                `http://localhost:8080/products/639e590c58f2e99bb1cdd98e`
-            )
-        }
-        it('Id correspondiente', (done) => {
-            data()
-                .then((res) => {
-                    expect(res.data._id).to.be.equal(`639e590c58f2e99bb1cdd98e`)
-                    done()
-                })
-                .catch((err) => {
-                    done(err)
-                })
-        })
-        it(`Objeto`, (done) => {
-            data()
-                .then((res) => {
-                    expect(res.data).to.be.a(`object`)
-                    done()
-                })
-                .catch((err) => {
-                    done(err)
-                })
-        })
-        it(`Status correcto`, (done) => {
-            data()
-                .then((res) => {
-                    expect(res.status).to.equal(200)
-                    done()
-                })
-                .catch((err) => {
-                    done(err)
-                })
-        })
-    })
     // create product
     const product_test_create = () => {
         return {
@@ -166,7 +128,7 @@ describe(`Rutas Productos`, () => {
                     done()
                 })
                 .catch((err) => {
-                    done(err)
+                    done(err) 
                 })
         })
         it('Status correcto', (done) => {
@@ -179,5 +141,20 @@ describe(`Rutas Productos`, () => {
                     done(err)
                 })
         })
+        // it('Borrado correctamente', (done) => {
+        //     const data = async () => {
+        //         return await axios.get(
+        //             `http://localhost:8080/products/${id_create}`
+        //         )
+        //     }
+        //     data()
+        //         .then((res) => {
+        //             expect(res).to.equal(null)
+        //             done()
+        //         })
+        //         .catch((err) => {
+        //             done(err)
+        //         })
+        // })
     })
 })

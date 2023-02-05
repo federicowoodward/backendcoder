@@ -12,8 +12,7 @@ const getProducts = async (req, res) => {
 }
 
 const getProductById = async (req, res) => {
-    const id = req.params.id
-    const products = await productsDtos.getProduct(id)
+    const products = await productsDtos.getProduct(req.params.id)
     res.json(products)
 }
 
@@ -24,9 +23,7 @@ const createProduct = async (req, res) => {
 }
 
 const udapteProduct = async (req, res) => {
-    const id = req.params.id
-    const data = req.body
-    const updatedProduct = await ProductsMongo.update(id, data)
+    const updatedProduct = await productsDtos.update(req.params.id, req.body)
     res.json({
         mensaje: 'Producto actualizado con exito!',
         udapte: updatedProduct,
@@ -34,8 +31,7 @@ const udapteProduct = async (req, res) => {
 }
 
 const deleteProduct = async (req, res) => {
-    const id = req.params.id
-    const deleteProduct = await productsDtos.deleteProduct(id)
+    const deleteProduct = await productsDtos.deleteProduct(req.params.id)
     try {
         res.json({
             message: 'deleted',
@@ -48,12 +44,11 @@ const deleteProduct = async (req, res) => {
 }
 
 const createTwilioClient = async () => {
-    const { num } = req.body
     try {
         await client.messages.create({
             body: 'prueba twilio wsp',
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:+${num}`,
+            to: `whatsapp:+${req.body.num}`,
         })
         res.send('mensaje enviado')
     } catch (err) {
