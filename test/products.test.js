@@ -115,6 +115,51 @@ describe(`Rutas Productos`, () => {
                 })
         })
     })
+    // udapte 
+    // describe("UDAPTE", () => {
+    //     const product_test_udapte = () => {
+    //         return {
+    //             nombre: 'udapte',
+    //             descripcion: 'test udapte time: ' + Date.now(),
+    //             precio: 2,
+    //             stock: 2,
+    //         }
+    //     }
+    //     const data = async () => {
+    //         return await axios.put(
+    //             `http://localhost:8080/products/${id_create}`,
+    //             product_test_udapte()
+    //         )
+    //     }
+    //     it('Status correcto', (done) => {
+    //         data()
+    //             .then((res) => {
+    //                 expect(res.status).to.equal(200)
+    //                 done()
+    //             })
+    //             .catch((err) => {
+    //                 done(err)
+    //             })
+    //     })
+    //     it('Actualizado correctamente', (done) => {
+    //         const data = async () => {
+    //             return await axios.get(
+    //                 `http://localhost:8080/products/${id_create}`
+    //             )
+    //         }
+    //         data()
+    //             .then((res) => {
+    //                 expect(res.data.nombre).to.equal("udapte")
+    //                 expect(res.data.precio).to.equal(2)
+    //                 expect(res.data.stock).to.equal(2)
+    //                 done()
+    //             })
+    //             .catch((err) => {
+    //                 done(err)
+    //             })
+    //     })
+    // })
+    // delete
     describe('DELETE', () => {
         const data = async () => {
             return await axios.delete(
@@ -128,7 +173,7 @@ describe(`Rutas Productos`, () => {
                     done()
                 })
                 .catch((err) => {
-                    done(err) 
+                    done(err)
                 })
         })
         it('Status correcto', (done) => {
@@ -141,20 +186,20 @@ describe(`Rutas Productos`, () => {
                     done(err)
                 })
         })
-        // it('Borrado correctamente', (done) => {
-        //     const data = async () => {
-        //         return await axios.get(
-        //             `http://localhost:8080/products/${id_create}`
-        //         )
-        //     }
-        //     data()
-        //         .then((res) => {
-        //             expect(res).to.equal(null)
-        //             done()
-        //         })
-        //         .catch((err) => {
-        //             done(err)
-        //         })
-        // })
+        it('Borrado correctamente', (done) => {
+            const data = async () => {
+                return await axios.get(
+                    `http://localhost:8080/products/${id_create}`
+                )
+            }
+            data()
+                .then((res) => {
+                    expect(res.data).to.equal(null)
+                    done()
+                })
+                .catch((err) => {
+                    done(err)
+                })
+        })
     })
 })

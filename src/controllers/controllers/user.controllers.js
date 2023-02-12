@@ -1,8 +1,8 @@
 import logger from "../../utils/logger.js";
-import UsersMongoDAO from "../daos/usersMongoDAO.js";
+import { UsersDtos } from "../dtos/users.dtos.js";
 import errorFactory from "../factory/error.factory.js";
 
-const UsersMongo = new UsersMongoDAO();
+const UsersMongo = new UsersDtos();
 
 const registerUsers = async (req, res) => {
     const user = req.body

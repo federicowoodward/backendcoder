@@ -23,7 +23,7 @@ const createProduct = async (req, res) => {
 }
 
 const udapteProduct = async (req, res) => {
-    const updatedProduct = await productsDtos.update(req.params.id, req.body)
+    const updatedProduct = await productsDtos.udapteProduct(req.params.id, req.body)
     res.json({
         mensaje: 'Producto actualizado con exito!',
         udapte: updatedProduct,

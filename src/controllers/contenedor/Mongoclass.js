@@ -14,7 +14,8 @@ export class MongoClass {
         return await new this.collection(data).save()
     }
     async update(id, product) {
-        return await this.collection.udapteOne({ _id: id }, { $set: product })
+        console.log(product, id)
+        return await new this.collection.udapteOne({ _id: id }, { $set: product })
     }
     async delete(id) {
         return await this.collection.deleteOne({ _id: id })
