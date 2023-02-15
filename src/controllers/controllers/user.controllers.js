@@ -2,30 +2,18 @@ import logger from "../../utils/logger.js";
 import { UsersDtos } from "../dtos/users.dtos.js";
 import errorFactory from "../factory/error.factory.js";
 
-const UsersMongo = new UsersDtos();
+const UsersDtos = new UsersDtos();
 
 const registerUsers = async (req, res) => {
-    const user = req.body
-    const userCreated = await UsersMongo.createPassword(user)
+    const userCreated = await UsersDtos.createUser(req.body)
     res.send({ "status": "created", "extra": { userCreated } })
 }
 
 const loginUser = async (req, res) => {
-    const user = req.body
-    const loginUser = await UsersMongo.searchUser(user)
-    if (loginUser.length === 0) {
-        res.send(errorFactory.getStatusError("error", "user"))
-    } else {
-        let compare = UsersMongo.comparePassword(user.password, loginUser[0].password)
-        if (compare) {
-            res.send({ "status": "correct" })
-        } else if (!compare) {
-            res.send(errorFactory.getStatusError("error", "password"))
-        }
-    }
+    const loginUser = await UsersDtos.validateUser(req.body)
+    res.send(loginUser)
 }
-
-const postCookies = (req, res) => {
+    const postCookies = (req, res) => {
     const name = req.body.name
     try {
         req.session.name = name;
@@ -35,6 +23,11 @@ const postCookies = (req, res) => {
         logger.error(err)
         res.json(errorFactory.getError(err))
     }
+}
+
+const deleteUser = async (req, res) => {
+    const deletedUser = await UsersDtos.deleteUser(req.body)
+    res.send(deletedUser)
 }
 
 const getCookies = (req, res) => {
@@ -61,4 +54,4 @@ const deleteCookies = (req, res) => {
     }
 }
 
-export { registerUsers, loginUser, postCookies, getCookies, deleteCookies};
+export { registerUsers, loginUser, postCookies, getCookies, deleteCookies, deleteUser};
