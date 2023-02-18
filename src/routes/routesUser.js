@@ -19,7 +19,7 @@ router.use(
         saveUninitialized: false,
         secret: "clave",
         cookie: {
-            maxAge: 10000,
+            maxAge: 50000,
             // para deployment dejar sameSite : none, secure: true
             sameSite: "lax",
             secure: false,
