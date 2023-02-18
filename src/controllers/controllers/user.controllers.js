@@ -1,24 +1,24 @@
-import logger from "../../utils/logger.js";
-import { UsersDtos } from "../dtos/users.dtos.js";
-import errorFactory from "../factory/error.factory.js";
+import logger from '../../utils/logger.js'
+import { UsersDtos } from '../dtos/users.dtos.js'
+import errorFactory from '../factory/error.factory.js'
 
-const UsersDtos = new UsersDtos();
+const usersDtos = new UsersDtos()
 
 const registerUsers = async (req, res) => {
-    const userCreated = await UsersDtos.createUser(req.body)
-    res.send({ "status": "created", "extra": { userCreated } })
+    const userCreated = await usersDtos.createUser(req.body)
+    res.send({ status: 'created', extra: { userCreated } })
 }
 
 const loginUser = async (req, res) => {
-    const loginUser = await UsersDtos.validateUser(req.body)
+    const loginUser = await usersDtos.validateUser(req.body)
     res.send(loginUser)
 }
-    const postCookies = (req, res) => {
+const postCookies = (req, res) => {
     const name = req.body.name
     try {
-        req.session.name = name;
-        req.session.rol = "admin";
-        res.send({ message: "saves", rol: req.session.rol }).status(201)
+        req.session.name = name
+        req.session.rol = 'admin'
+        res.send({ message: 'saves', rol: req.session.rol }).status(201)
     } catch (err) {
         logger.error(err)
         res.json(errorFactory.getError(err))
@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-    const deletedUser = await UsersDtos.deleteUser(req.body)
+    const deletedUser = await usersDtos.deleteUser(req.body)
     res.send(deletedUser)
 }
 
@@ -34,9 +34,9 @@ const getCookies = (req, res) => {
     try {
         console.log(req.session)
         if (req.session.name !== undefined && req.session.rol !== undefined) {
-            res.send({ user: req.session.name, rol: req.session.rol });
+            res.send({ user: req.session.name, rol: req.session.rol })
         } else {
-            res.send("empty")
+            res.send('empty')
         }
     } catch (error) {
         logger.error(err)
@@ -46,12 +46,18 @@ const getCookies = (req, res) => {
 
 const deleteCookies = (req, res) => {
     try {
-        req.session.destroy(function () {
-        })
+        req.session.destroy(function () {})
     } catch (error) {
         logger.error(err)
         res.json(errorFactory.getError(err))
     }
 }
 
-export { registerUsers, loginUser, postCookies, getCookies, deleteCookies, deleteUser};
+export {
+    registerUsers,
+    loginUser,
+    postCookies,
+    getCookies,
+    deleteCookies,
+    deleteUser,
+}

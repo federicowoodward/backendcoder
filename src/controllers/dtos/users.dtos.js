@@ -1,5 +1,6 @@
 import UsersMongoDAO from '../daos/usersMongoDAO.js'
 import errorFactory from '../factory/error.factory.js'
+import { comparePassword, createPassword } from "../helpers/bycript.js"
 
 export class UsersDtos {
     constructor() {
@@ -7,16 +8,18 @@ export class UsersDtos {
     }
 
     async createUser(data) {
-        let user = await this.usersMongo.createUser(data)
+        let userToCreate = data
+        userToCreate.password = await createPassword(data.password)
+        let user = await this.usersMongo.createUser(userToCreate)
         return user
     }
     
     async validateUser(user) {
-        let validate = this.usersMongo.searchUser(user.name)
-        if (validate.length === 0) {
+        let dbUser = await this.usersMongo.searchUser(user.name)
+        if (dbUser.length === 0) {
             return errorFactory.getStatusError('error', 'user')
-        } else if (user.password === validate.password) {
-            return { status: 'correct' }
+        } else if (comparePassword(user.password, dbUser[0].password)) {
+            return { status: 'correct', user: dbUser }
         } else {
             return errorFactory.getStatusError('error', 'password')
         }
