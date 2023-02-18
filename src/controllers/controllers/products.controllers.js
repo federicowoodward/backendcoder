@@ -17,7 +17,8 @@ const getProductById = async (req, res) => {
 }
 
 const createProduct = async (req, res) => {
-    let product = createHelper(req.body)
+    let product_to_create = req.body.product
+    let product = createHelper(product_to_create)
     const createdProduct = await productsDtos.createProduct(product)
     res.json({ message: 'created', id: createdProduct._id })
 }
