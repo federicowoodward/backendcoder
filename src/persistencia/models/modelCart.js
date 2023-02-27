@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
-
+import mongoose from 'mongoose'
 
 const cartSchema = new mongoose.Schema({
     productos: {
         type: Object,
-        required: false,
+        required: true,
     },
     user: {
         type: String,
         required: true,
-        maxLength: 50,
-        }
+        maxLength: 20,
+        unique: true
+    },
 })
 
-export const cartModel = mongoose.model(`Carrito`, cartSchema);
+export const cartModel = mongoose.model(`Carritos`, cartSchema)
