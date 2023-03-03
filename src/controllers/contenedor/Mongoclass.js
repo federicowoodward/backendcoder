@@ -13,12 +13,8 @@ export class MongoClass {
     async create(data) {
         return await new this.collection(data).save()
     }
-    async update(id, data, key) {
-        if (key === undefined) {
-            return await this.collection.updateOne({ _id: id }, { $set: data })
-        } else {
-            return await this.collection.updateOne({ _id: id }, { $set: { productos: data }})
-        }
+    async update(id, data) {
+        return await new this.collection.updateOne({ _id: id }, { $set: data })
     }
     async delete(id) {
         return await this.collection.deleteOne({ _id: id })
